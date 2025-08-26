@@ -1,0 +1,19 @@
+.job-list-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.job-list-info {
+    flex: 1
+}
+
+.job-list-favourite-time {
+    margin-left: auto;
+}
+
+.job-list-favourite-time i {
+    font-size: 1.3rem;
+    cursor: pointer;
+}

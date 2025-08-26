@@ -1,0 +1,500 @@
+<body>
+
+    <!--=================================
+    My Resume -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="section-title-02">
+          <h3>My Resume</h3>
+        </div>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-primary btn-md mb-4 mb-lg-0" href="my-resume.html">Preview My Resume</a>
+      </div>
+      <div class="col-12">
+        <div class="user-dashboard-info-box">
+          <div class="form-group col-md-12 p-0">
+            <label class="form-label">Cover Letter</label>
+            <textarea class="form-control" rows="4">{{coverLetter}}</textarea>
+          </div>
+        </div>
+        <div class="user-dashboard-info-box">
+          <div class="dashboard-resume-title d-flex align-items-center">
+            <div class="section-title-02 mb-sm-0">
+              <h4 class="mb-0">Education</h4>
+            </div>
+            <a class="btn btn-md ms-sm-auto btn-primary" data-bs-toggle="collapse" href="#dateposted" role="button" aria-expanded="false" aria-controls="dateposted">Add Education</a>
+          </div>
+          <div class="collapse show" id="dateposted">
+            <div class="bg-light p-3 mt-4">
+              <form class="row" [formGroup]="educationForm" (ngSubmit)="saveEducationCandidate()">
+                <div class="form-group mb-3 col-md-12">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" value="" formControlName="diploma">
+                </div>
+                <div class="form-group mb-3 col-md-6 select-border">
+                  <label class="form-label">Year</label>
+                  <select class="form-control basic-select" formControlName="endDate">
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                  </select>
+                </div>
+                <div class="form-group mb-3 col-md-6">
+                  <label class="form-label">Institute</label>
+                  <input type="text" class="form-control" value="" formControlName="university">
+                </div>
+                <div class="form-group mb-3 col-md-12">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" rows="4" formControlName="description"></textarea>
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                  <button class="btn btn-md btn-primary" type="submit" [disabled]="educationForm.invalid">Add</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="jobber-candidate-timeline mt-4" *ngFor="let edu of educations; let i = index">
+            <div class="jobber-timeline-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="jobber-timeline-item">
+              <div class="jobber-timeline-cricle">
+                <i class="far fa-circle"></i>
+              </div>
+              <div class="d-flex flex-column">
+              <div class="jobber-timeline-info">
+                <div class="dashboard-timeline-info">
+                  <div class="dashboard-timeline-edit">
+                    <ul class="list-unstyled d-flex">
+                      <li><button class="text-end" data-bs-toggle="collapse" href="#dateposted-02" role="button" aria-expanded="false" aria-controls="dateposted" (click)="editEducation(i)"> <i class="fas fa-pencil-alt text-info me-2"></i> </button></li>
+                      <li><button (click)="deleteEducation(edu.id,i)" class="btn btn-link p-0"><i class="far fa-trash-alt text-danger"></i></button></li>
+                    </ul>
+                  </div>
+                  <div>
+                  <span class="jobber-timeline-time">{{edu.endDate}}</span>
+                  <h6 class="mb-2">{{edu.diploma}}</h6>
+                  <span>- {{edu.university}}</span>
+                  <p class="mt-2">{{edu.description}}</p>
+                  </div>
+                </div>
+                <div class="collapse show" id="dateposted-02">
+                  <div class="bg-light p-3" *ngIf="editingIndex === i">
+                    <form class="row collapse show" id="dateposted-01" (ngSubmit)="updateEducation(i)">
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" [(ngModel)]="edu.diploma" name="diploma-{{i}}" required>
+                      </div>
+                      <div class="form-group mb-3 col-md-6 select-border">
+                        <label class="form-label">Year</label>
+                        <select class="form-control basic-select" [(ngModel)]="edu.endDate" name="endDate-{{i}}">
+                          <option value="2008">2008</option>
+                          <option value="2009">2009</option>
+                          <option value="2010">2010</option>
+                          <option value="2011">2011</option>
+                          <option value="2012">2012</option>
+                          <option value="2013">2013</option>
+                          <option value="2014">2014</option>
+                          <option value="2015">2015</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2028">2028</option>
+                          <option value="2029">2029</option>
+                          <option value="2030">2030</option>
+                        </select>
+                      </div>
+                      <div class="form-group mb-3 col-md-6">
+                        <label class="form-label">Institute</label>
+                        <input type="text" class="form-control" [(ngModel)]="edu.university" name="university-{{i}}">
+                      </div>
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="edu.description" name="description-{{i}}"></textarea>
+                      </div>
+                      <div class="form-group col-md-12 mb-0">
+                        <button class="btn btn-md btn-primary" type="submit">Update</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <!--=================================
+        Work & Experience -->
+        <div class="user-dashboard-info-box">
+          <div class="dashboard-resume-title d-flex align-items-center">
+            <div class="section-title-02 mb-sm-0">
+              <h4 class="mb-0">Work & Experience</h4>
+            </div>
+            <a class="btn btn-md ms-sm-auto btn-primary" data-bs-toggle="collapse" href="#dateposted-05" role="button" aria-expanded="false" aria-controls="dateposted">Add Experience</a>
+          </div>
+          <div class="collapse show" id="dateposted-05">
+            <div class="bg-light p-3 mt-4">
+              <form class="row" [formGroup]="experienceForm" (ngSubmit)="saveExperienceCandidate()">
+                <div class="form-group mb-3 col-md-12">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" value="" formControlName="jobTitle">
+                </div>
+                <div class="form-group mb-3 col-md-12">
+                  <label class="form-label">Company name</label>
+                  <input type="text" class="form-control" value="" formControlName="companyName">
+                </div>
+      <div class="mb-3 col-md-6 datetimepickers">
+        <label class="form-label">From</label>
+        <div class="input-group date" id="datetimepicker-01" data-target-input="nearest">
+          <input type="text"
+                 class="form-control datetimepicker-input"
+                 formControlName="startExpDate"
+                 data-target="#datetimepicker-01"
+                 placeholder="yyyy/MM/dd">
+          <div class="input-group-append d-flex" data-target="#datetimepicker-01" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-3 col-md-6 select-border datetimepickers">
+        <label class="form-label">To</label>
+        <div class="input-group date" id="datetimepicker-02" data-target-input="nearest">
+          <input type="text"
+                 class="form-control datetimepicker-input"
+                 formControlName="endExpDate"
+                 data-target="#datetimepicker-02"
+                 placeholder="yyyy/MM/dd">
+          <div class="input-group-append d-flex" data-target="#datetimepicker-02" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+          </div>
+        </div>
+      </div>
+                <div class="form-group mb-3 col-md-12">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" rows="4" formControlName="description"></textarea>
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                  <button class="btn btn-md btn-primary" type="submit" [disabled]="experienceForm.invalid">Add</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="jobber-candidate-timeline mt-4" *ngFor="let exp of experiences; let i=index">
+            <div class="jobber-timeline-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="jobber-timeline-item">
+              <div class="jobber-timeline-cricle">
+                <i class="far fa-circle"></i>
+              </div>
+              <div class="jobber-timeline-info">
+                <div class="dashboard-timeline-info">
+                  <div class="dashboard-timeline-edit">
+                    <ul class="list-unstyled d-flex">
+                      <li><button class="text-end" data-bs-toggle="collapse" href="#dateposted-06" role="button" aria-expanded="false" aria-controls="dateposted" (click)="editExperience(i)"> <i class="fas fa-pencil-alt text-info me-2"></i> </button></li>
+                      <li><button (click)="deleteExperience(exp.id,i)"><i class="far fa-trash-alt text-danger"></i></button></li>
+                    </ul>
+                  </div>
+                  <span class="jobber-timeline-time">{{exp.startExpDate}} to {{exp.endExpDate}}</span>
+                  <h6 class="mb-2">{{exp.jobTitle}}</h6>
+                  <span>{{exp.companyName}}</span>
+                  <p class="mt-2">{{exp.description}}</p>
+                </div>
+                <div class="collapse show" id="dateposted-06">
+                  <div class="bg-light p-3" *ngIf="editingIndex === i">
+                    <form class="row collapse show" id="dateposted-form-01" (ngSubmit)="updateExperience(i)">
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" [(ngModel)]="tempExperience.jobTitle" name="jobTitle-{{i}}" required>
+                      </div>
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Company name</label>
+                        <input type="text" class="form-control" [(ngModel)]="tempExperience.companyName" name="companyName-{{i}}" required>
+                      </div>
+                      <div class="form-group mb-3 col-md-6 select-border datetimepickers">
+                        <label class="form-label">From</label>
+                        <div class="input-group date" id="datetimepicker-05" data-target-input="nearest">
+                          <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-05" [(ngModel)]="tempExperience.startExpDate" name="startExpDate-{{i}}">
+                          <div class="input-group-append d-flex" data-target="#datetimepicker-05" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group mb-3 col-md-6 select-border datetimepickers">
+                        <label class="form-label">Two</label>
+                        <div class="input-group date" id="datetimepicker-06" data-target-input="nearest">
+                          <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-06" [(ngModel)]="tempExperience.endExpDate" name="endExpDate-{{i}}">
+                          <div class="input-group-append d-flex" data-target="#datetimepicker-06" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="tempExperience.description" name="description-{{i}}" required></textarea>
+                      </div>
+                      <div class="form-group col-md-12 mb-0">
+                        <button class="btn btn-md btn-primary" type="submit">Update</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--=================================
+        Work & Experience -->
+        <!--=================================
+        Professional Skill -->
+        <div class="user-dashboard-info-box">
+          <div class="dashboard-resume-title d-flex align-items-center">
+            <div class="section-title-02 mb-sm-0">
+              <h4 class="mb-0">Professional Skill</h4>
+            </div>
+            
+     <a class="btn btn-md ms-sm-auto btn-primary" data-bs-toggle="collapse" href="#dateposted-11" role="button" aria-expanded="false" aria-controls="dateposted">Add Skill</a>
+
+          </div>
+          <div class="collapse show" id="dateposted-11">
+            <div class="bg-light p-3 mt-4">
+              <form class="row align-items-center"  [formGroup]="skillForm" (ngSubmit)="addSkill()">
+                <div class="form-group mb-3 col-md-6">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" formControlName="title">
+                </div>
+                <div class="form-group mb-3 col-md-5">
+                  <label class="form-label">Percentage</label>
+                  <input type="text" class="form-control" formControlName="percentage" >
+                </div>
+                  <div class="form-group col-md-12 mb-0">
+                        <button class="btn btn-md btn-primary" type="submit" [disabled]="skillForm.invalid">add</button>
+                      </div>
+               <!--  <div class="form-group mb-3 col-md-1 text-center">
+                  <a class="mt-3 d-block" href="#"><i class="far fa-trash-alt text-danger"></i></a>
+                </div>-->
+              </form>
+            
+             
+            
+            </div>
+          </div>
+                    <div class="jobber-candidate-timeline mt-4" *ngFor="let skill of skills; let i=index">
+            <div class="jobber-timeline-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="jobber-timeline-item">
+              <div class="jobber-timeline-cricle">
+                <i class="far fa-circle"></i>
+              </div>
+              <div class="jobber-timeline-info">
+                <div class="dashboard-timeline-info">
+                  <div class="dashboard-timeline-edit">
+                    <ul class="list-unstyled d-flex">
+                      <li><button class="text-end" data-bs-toggle="collapse" href="#dateposted-06" role="button" aria-expanded="false" aria-controls="dateposted" (click)="editSkill(i)"> <i class="fas fa-pencil-alt text-info me-2"></i> </button></li>
+                      <li><button (click)="deleteSkill(skill.id,i)"><i class="far fa-trash-alt text-danger"></i></button></li>
+                    </ul>
+                  </div>
+                  <h6 class="mb-2">{{skill.title}}</h6>
+                  <span>{{skill.percentage}}</span>
+                </div>
+                <div class="collapse show" id="dateposted-06">
+                  <div class="bg-light p-3" *ngIf="editingIndex === i">
+                    <form class="row collapse show" id="dateposted-form-01" (ngSubmit)="updateSkill(i)">
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" [(ngModel)]="tempSkill.title" name="title-{{i}}" required>
+                      </div>
+                      <div class="form-group mb-3 col-md-12">
+                        <label class="form-label">Percentage</label>
+                        <input type="text" class="form-control" [(ngModel)]="tempSkill.percentage" name="percentage-{{i}}" required>
+                      </div>
+                      <div class="form-group col-md-12 mb-0">
+                        <button class="btn btn-md btn-primary" type="submit">Update</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--=================================
+        Professional Skill -->
+        <button class="btn btn-md btn-primary" routerLink="">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</section>
+    <!--=================================
+    My Resume -->
+    <!--=================================
+    Back To Top-->
+    <div id="back-to-top" class="back-to-top">
+      <i class="fas fa-angle-up"></i>
+    </div>
+    <!--=================================
+    Back To Top-->
+    <!--=================================
+    Signin Modal Popup -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header p-4">
+            <h4 class="mb-0 text-center">Login to Your Account</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="login-register">
+              <fieldset>
+                <legend class="px-2">Choose your Account Type</legend>
+                <ul class="nav nav-tabs nav-tabs-border d-flex" role="tablist">
+                  <li class="nav-item me-4">
+                    <a class="nav-link active"  data-bs-toggle="tab" href="#candidate" role="tab" aria-selected="false">
+                      <div class="d-flex">
+                        <div class="tab-icon">
+                          <i class="flaticon-users"></i>
+                        </div>
+                        <div class="ms-3">
+                          <h6 class="mb-0">Candidate</h6>
+                          <p class="mb-0">Log in as Candidate</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  data-bs-toggle="tab" href="#employer" role="tab" aria-selected="false">
+                      <div class="d-flex">
+                        <div class="tab-icon">
+                          <i class="flaticon-suitcase"></i>
+                        </div>
+                        <div class="ms-3">
+                          <h6 class="mb-0">Employer</h6>
+                          <p class="mb-0">Log in as Employer</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </fieldset>
+              <div class="tab-content">
+                <div class="tab-pane active" id="candidate" role="tabpanel">
+                  <form class="mt-4">
+                    <div class="row">
+                      <div class="form-group col-12">
+                        <label for="Email2">Username / Email Address:</label>
+                        <input type="text" class="form-control" id="Email22">
+                      </div>
+                      <div class="form-group col-12">
+                        <label for="password2">Password*</label>
+                        <input type="password" class="form-control" id="password32">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a class="btn btn-primary d-grid" href="#">Sign In</a>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="ms-md-3 mt-3 mt-md-0 forgot-pass">
+                          <a href="#">Forgot Password?</a>
+                          <p class="mt-1">Don't have account? <a href="register.html">Sign Up here</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="employer" role="tabpanel">
+                  <form class="mt-4">
+                    <div class="row">
+                      <div class="form-group col-12">
+                        <label for="Email2">Username / Email Address:</label>
+                        <input type="text" class="form-control" id="Email2">
+                      </div>
+                      <div class="form-group col-12">
+                        <label for="password2">Password *</label>
+                        <input type="password" class="form-control" id="password2">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a class="btn btn-primary d-grid" href="#">Sign up</a>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="ms-md-3 mt-3 mt-md-0">
+                          <a href="#">Forgot Password?</a>
+                          <div class="custom-control custom-checkbox mt-2">
+                            <input type="checkbox" class="custom-control-input" id="Remember-02">
+                            <label class="custom-control-label" for="Remember-02">Remember Password</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="mt-4">
+                <fieldset>
+                  <legend class="px-2">Login or Sign up with</legend>
+                  <div class="social-login">
+                    <ul class="list-unstyled d-flex mb-0">
+                      <li class="facebook text-center">
+                        <a href="#"> <i class="fab fa-facebook-f me-4"></i>Login with Facebook</a>
+                      </li>
+                      <li class="twitter text-center">
+                        <a href="#"> <i class="fab fa-twitter me-4"></i>Login with Twitter</a>
+                      </li>
+                      <li class="google text-center">
+                        <a href="#"> <i class="fab fa-google me-4"></i>Login with Google</a>
+                      </li>
+                      <li class="linkedin text-center">
+                        <a href="#"> <i class="fab fa-linkedin-in me-4"></i>Login with Linkedin</a>
+                      </li>
+                    </ul>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--=================================
+    Signin Modal Popup -->
+  </body>
+
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/jobber/dashboard-candidates-my-resume.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Apr 2024 18:48:55 GMT -->
+
