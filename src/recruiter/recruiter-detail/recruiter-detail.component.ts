@@ -41,7 +41,7 @@ export class RecruiterDetailComponent implements OnInit {
     )
   }
 
-      sendMessage() {
+  sendMessage() {
   if (this.messageForm.invalid) {
     this.errorMessage = "Veuillez remplir tous les champs correctement.";
     return ;
