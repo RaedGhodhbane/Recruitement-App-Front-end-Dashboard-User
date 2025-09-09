@@ -12,6 +12,7 @@ export class ProfileCandidateComponent implements OnInit {
   profileForm!: FormGroup;
   id!:number;
   candidate:any;
+  fileToUpload: any;
   constructor(private fb: FormBuilder, private candidateService:CandidateService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class ProfileCandidateComponent implements OnInit {
       gender:['', Validators.required],
       title:['', Validators.required],
       description:['', Validators.required],
+      image:['', Validators.required]
       
     })
     this.getOneCandidate();
@@ -48,7 +50,8 @@ export class ProfileCandidateComponent implements OnInit {
       phone: this.candidate.phone,
       gender: this.candidate.gender,
       title: this.candidate.title,
-      description: this.candidate.description
+      description: this.candidate.description,
+      image:this.candidate.image
     });
     });
   }
@@ -56,6 +59,16 @@ export class ProfileCandidateComponent implements OnInit {
   updateCandidate() {
     const candidate = JSON.parse(localStorage.getItem('user') || '{}');
     const candidateId = candidate.id;
+    let formData = new FormData();
+formData.append("name", this.profileForm.value.name);
+formData.append("email", this.profileForm.value.email);
+formData.append("dateOfBirth", this.profileForm.value.dateOfBirth);
+formData.append("phone", this.profileForm.value.phone);
+formData.append("gender", this.profileForm.value.gender);
+formData.append("title", this.profileForm.value.title);
+formData.append("description", this.profileForm.value.description);
+
+formData.append("file", this.fileToUpload[0]);
     this.candidateService.updateCandidate(this.profileForm.value,candidateId).subscribe(
       (res:any) => {
         console.log(res);
@@ -63,5 +76,10 @@ export class ProfileCandidateComponent implements OnInit {
       }
     )
   }
+
+handleFileInput(files: any) {
+this.fileToUpload = <Array<File>>files.target.files;
+console.log(this.fileToUpload)
+}
 
 }
