@@ -36,24 +36,25 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.loginCandidate(credentials).subscribe({
       next: (res: any) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('user', JSON.stringify(res.user));
+
         try {
           const payload = JSON.parse(atob(res.token.split('.')[1]));
           const role = payload.authorities?.[0];
-          if (role) {
-            localStorage.setItem('role', role);
-          } else {
-            console.warn('Aucun rôle trouvé dans le token');
+          console.log('role ', role);
+          if (role === 'ROLE_ADMIN') {
+            this.errorMessage = "Accès refusé : seul le candidat ou le recruteur peuvent se connecter.";
+            return;
           }
-          setTimeout(() => {
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('role', role);
+
             this.router.navigate(['/']).then(() => {
-    location.reload(); 
-  });
-         
-          }, 0);
+            location.reload(); 
+          });
         } catch (e) {
           console.error('Erreur lors du décodage du token JWT', e);
+          this.errorMessage = 'Token invalide, impossible de vérifier les droits.';
         }
 
       },
