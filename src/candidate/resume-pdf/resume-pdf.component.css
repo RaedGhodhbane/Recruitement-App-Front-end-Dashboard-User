@@ -1,0 +1,12 @@
+.jobber-timeline-cricle .skill-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
