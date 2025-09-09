@@ -10,6 +10,7 @@ export class CandidatesDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
