@@ -302,7 +302,7 @@
                         class="form-control datetimepicker-input"
                         formControlName="startExpDate"
                         data-target="#datetimepicker-01"
-                        placeholder="yyyy/MM/dd"
+                        placeholder="yyyy-MM-dd"
                       />
                       <div
                         class="input-group-append d-flex"
@@ -329,7 +329,7 @@
                         class="form-control datetimepicker-input"
                         formControlName="endExpDate"
                         data-target="#datetimepicker-02"
-                        placeholder="yyyy/MM/dd"
+                        placeholder="yyyy-MM-dd"
                       />
                       <div
                         class="input-group-append d-flex"
@@ -532,7 +532,7 @@
                 <form
                   class="row align-items-center"
                   [formGroup]="skillForm"
-                  (ngSubmit)="addSkill()"
+                  (ngSubmit)="saveSkill()"
                 >
                   <div class="form-group mb-3 col-md-6">
                     <label class="form-label">Title</label>

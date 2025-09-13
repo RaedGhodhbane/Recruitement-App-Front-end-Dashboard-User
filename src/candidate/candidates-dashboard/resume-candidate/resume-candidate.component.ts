@@ -24,7 +24,8 @@ export class ResumeCandidateComponent implements OnInit {
   tempSkill: any = {}
 
 
-  constructor(private fb:FormBuilder, private educationService:EducationService, private experienceService:ExperienceService, private skillService: SkillService) { }
+  constructor(private fb:FormBuilder, private educationService:EducationService
+    , private experienceService:ExperienceService, private skillService: SkillService) { }
 
   ngOnInit(): void {
     this.userConnect = JSON.parse(localStorage.getItem('user')!);
@@ -103,7 +104,7 @@ updateEducation(index: number) {
     return;
   }
 
-  localStorage.setItem('educations', JSON.stringify(this.educations));
+ localStorage.setItem('educations', JSON.stringify(this.educations));
 
   const educationId = updatedEdu.id;
 
@@ -210,7 +211,7 @@ deleteExperience(id:any, index:number) {
   })
 }
 
- addSkill() {
+ saveSkill() {
     const candidate = JSON.parse(localStorage.getItem('user') || '{}');
     const candidateId = candidate.id;
 
