@@ -69,13 +69,13 @@ job list -->
                 <div class="job-list-details">
                   <div class="job-list-info">
                     <div class="job-list-title">
-                      <h5 class="mb-0">{{ offer.title }}</h5>
+                      <h5 class="mb-0">{{ offer?.title }}</h5>
                     </div>
                     <div class="job-list-option">
                       <ul class="list-unstyled">
                         <li>
                           <i class="fas fa-map-marker-alt pe-1"></i
-                          >{{ offer.address }}
+                          >{{ offer?.address }}
                         </li>
                         <li>
                           <i class="fas fa-phone fa-flip-horizontal fa-fw"></i
@@ -91,7 +91,7 @@ job list -->
                   ></a>
                   <span class="job-list-time order-1"
                     ><i class="far fa-clock pe-1"></i
-                    >{{ offer.publicationDate }}</span
+                    >{{ offer?.publicationDate }}</span
                   >
                 </div>
               </div>
@@ -107,7 +107,7 @@ job list -->
                   <div class="feature-info-content ps-3">
                     <label class="mb-1">Offered Salary</label>
                     <span class="mb-0 fw-bold d-block text-dark">{{
-                      offer.salary
+                      offer?.salary
                     }}</span>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ job list -->
                   ></i>
                   <div class="feature-info-content ps-3">
                     <label class="mb-1">Gender</label>
-                    <span class="mb-0 fw-bold d-block text-dark">Female</span>
+                    <span class="mb-0 fw-bold d-block text-dark">{{offer.recruiter?.gender}}</span>
                   </div>
                 </div>
               </div>
@@ -143,9 +143,9 @@ job list -->
                   ></i>
                   <div class="feature-info-content ps-3">
                     <label class="mb-1">Recruiter name</label>
-                    <span class="mb-0 fw-bold d-block text-dark" [routerLink]="['/recruiterDetail/'+offer.recruiter.id]"
-                      >{{ offer.recruiter?.name }}
-                      {{ offer.recruiter?.firstName }}</span
+                    <span class="mb-0 fw-bold d-block text-dark" [routerLink]="['/recruiterDetail/'+offer?.recruiter.id]"
+                      >{{ offer?.recruiter?.name }}
+                      {{ offer?.recruiter?.firstName }}</span
                     >
                   </div>
                 </div>
@@ -158,7 +158,7 @@ job list -->
                   <div class="feature-info-content ps-3">
                     <label class="mb-1">Experience</label>
                     <span class="mb-0 fw-bold d-block text-dark">{{
-                      offer.experience
+                      offer?.experience
                     }}</span>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ job list -->
           </div>
           <div class="my-4 my-lg-5">
             <h5 class="mb-3 mb-md-4">Job Description</h5>
-            <p>{{ offer.description }}</p>
+            <p>{{ offer?.description }}</p>
           </div>
           <hr />
           <div class="my-4 my-lg-5">
